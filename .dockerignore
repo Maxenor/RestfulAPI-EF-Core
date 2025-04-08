@@ -1,0 +1,40 @@
+# Git files
+.git
+.gitignore
+
+# Docker files
+Dockerfile*
+docker-compose*
+.dockerignore
+.env
+
+# Build artifacts
+**/bin/
+**/obj/
+
+# User-specific files
+*.user
+*.suo
+
+# Secrets (if stored locally, though .env is preferred for compose)
+secrets.json
+appsettings.*.secrets.json
+
+# IDE/Editor files
+.vs/
+.vscode/
+*.sln.DotSettings.user
+
+# Test results
+**/TestResults/
+
+# Logs
+**/logs/
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Rider files
+.idea/

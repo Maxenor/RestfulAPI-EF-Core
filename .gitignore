@@ -1,0 +1,55 @@
+# Ignore build outputs
+bin/
+obj/
+
+# Ignore Visual Studio files
+.vs/
+
+# Ignore user-specific files
+*.user
+*.suo
+*.vssscc
+*.csproj.user
+*.AssemblyInfo.cs
+
+# Ignore ReSharper files
+.idea/
+*.resharper*
+
+# Ignore environment files
+.env
+
+# Ignore NuGet packages cache
+packages/
+
+# Ignore test result files
+[Tt]est[Rr]esult*
+*.trx
+*.coverage
+*.opencover.xml
+*.coverlet.json
+
+# Ignore code coverage reports
+*.coveragexml
+*.opencoverreports
+*.junit
+*.lst
+*.rtf
+*.md
+
+# Ignore temporary files
+*.~
+*.tmp
+
+# Ignore debug files
+*.pdb
+
+# Ignore log files
+*.log
+
+# Ignore Docker related files if not meant to be committed
+# docker-compose.override.yml
+# Dockerfile.debug
+
+# Ignore node_modules if frontend project
+node_modules/
