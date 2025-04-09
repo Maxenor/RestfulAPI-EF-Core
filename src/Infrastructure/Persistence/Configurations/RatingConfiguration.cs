@@ -43,6 +43,16 @@ namespace EventManagement.Infrastructure.Persistence.Configurations
             // Indexes
             builder.HasIndex(r => new { r.SessionId, r.ParticipantId })
                    .IsUnique(); // Ensure a participant can rate a session only once
+
+            // Seed Data
+            builder.HasData(
+                new Rating { Id = 1, SessionId = 1, ParticipantId = 1, Score = 5, Comment = "Excellent session, very informative!" },
+                new Rating { Id = 2, SessionId = 2, ParticipantId = 2, Score = 4, Comment = "Good content, but the speaker was a bit fast." },
+                new Rating { Id = 3, SessionId = 3, ParticipantId = 3, Score = 3, Comment = "Average session, met expectations." },
+                new Rating { Id = 4, SessionId = 4, ParticipantId = 4, Score = 5, Comment = "Fantastic speaker, very engaging." },
+                new Rating { Id = 5, SessionId = 5, ParticipantId = 5, Score = 2, Comment = "Content was not relevant to my interests." }
+            );
+
         }
     }
 }

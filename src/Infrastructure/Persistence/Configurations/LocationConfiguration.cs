@@ -47,6 +47,13 @@ namespace EventManagement.Infrastructure.Persistence.Configurations
 
             // Indexes
             builder.HasIndex(l => new { l.Name, l.City, l.Country }); // Example composite index
+
+            // Seed Data
+            builder.HasData(
+                new Location { Id = 1, Name = "Conference Center A", Address = "123 Main St", City = "New York", Country = "USA", Capacity = 500 },
+                new Location { Id = 2, Name = "Tech Hub B", Address = "456 Innovation Dr", City = "San Francisco", Country = "USA", Capacity = 300 },
+                new Location { Id = 3, Name = "Event Hall C", Address = "789 Community Ave", City = "London", Country = "UK", Capacity = 1000 }
+            );
         }
     }
 }

@@ -34,6 +34,20 @@ namespace EventManagement.Infrastructure.Persistence.Configurations
             // Indexes (optional)
             builder.HasIndex(ss => ss.SpeakerId);
             // Composite key index is created automatically
+
+            // Seed Data for SessionSpeaker
+            builder.HasData(
+                new SessionSpeaker { SessionId = 1, SpeakerId = 1, Role = "Lead Speaker" },
+                new SessionSpeaker { SessionId = 2, SpeakerId = 2, Role = "Panelist" },
+                new SessionSpeaker { SessionId = 3, SpeakerId = 3, Role = "Keynote" },
+                new SessionSpeaker { SessionId = 4, SpeakerId = 4, Role = "Workshop Facilitator" },
+                new SessionSpeaker { SessionId = 5, SpeakerId = 1, Role = "Co-Speaker" },
+                new SessionSpeaker { SessionId = 5, SpeakerId = 2, Role = "Co-Speaker" },
+                new SessionSpeaker { SessionId = 6, SpeakerId = 3, Role = "Moderator" },
+                new SessionSpeaker { SessionId = 6, SpeakerId = 4, Role = "Panelist" },
+                new SessionSpeaker { SessionId = 7, SpeakerId = 1, Role = "Lead Speaker" },
+                new SessionSpeaker { SessionId = 7, SpeakerId = 3, Role = "Guest Speaker" }
+            );
         }
     }
 }

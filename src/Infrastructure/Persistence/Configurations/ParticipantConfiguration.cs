@@ -47,6 +47,16 @@ namespace EventManagement.Infrastructure.Persistence.Configurations
             // Indexes
             builder.HasIndex(p => p.Email)
                    .IsUnique(); // Ensure email addresses are unique
+
+
+            // Seed Data
+            builder.HasData(
+                new Participant { Id = 1, FirstName = "Alice", LastName = "Smith", Email = "alice.smith@example.com", Company = "TechCorp", JobTitle = "Software Engineer" },
+                new Participant { Id = 2, FirstName = "Bob", LastName = "Johnson", Email = "bob.johnson@example.com", Company = "Innovate Ltd.", JobTitle = "Project Manager" },
+                new Participant { Id = 3, FirstName = "Charlie", LastName = "Brown", Email = "charlie.brown@sample.net", Company = "Data Solutions", JobTitle = "Data Analyst" },
+                new Participant { Id = 4, FirstName = "Diana", LastName = "Prince", Email = "diana.prince@mail.org", Company = "Global Enterprises", JobTitle = "Marketing Specialist" },
+                new Participant { Id = 5, FirstName = "Ethan", LastName = "Hunt", Email = "ethan.hunt@secure.com", Company = "Security Inc.", JobTitle = "Security Consultant" }
+            );
         }
     }
 }

@@ -76,6 +76,65 @@ namespace EventManagement.Infrastructure.Persistence.Configurations
             builder.HasIndex(e => e.Status);
             builder.HasIndex(e => e.CategoryId);
             builder.HasIndex(e => e.LocationId);
+
+            // Seed Data
+            builder.HasData(
+                new Event
+                {
+                    Id = 1,
+                    Title = "Tech Conference 2025",
+                    Description = "Annual conference focusing on the latest trends in technology, AI, and software development.",
+                    StartDate = new DateTime(2025, 10, 15, 9, 0, 0, DateTimeKind.Utc), // Use UtcNow or specific UTC dates
+                    EndDate = new DateTime(2025, 10, 17, 17, 0, 0, DateTimeKind.Utc),
+                    Status = EventStatus.Published,
+                    CategoryId = 1, // Assuming Category ID 1 is 'Technology'
+                    LocationId = 1  // Assuming Location ID 1 is 'Conference Center A'
+                },
+                new Event
+                {
+                    Id = 2,
+                    Title = "Art Exhibition: Modern Masters",
+                    Description = "A curated collection of modern art from renowned artists.",
+                    StartDate = new DateTime(2025, 11, 5, 10, 0, 0, DateTimeKind.Utc),
+                    EndDate = new DateTime(2025, 12, 20, 18, 0, 0, DateTimeKind.Utc),
+                    Status = EventStatus.Published,
+                    CategoryId = 2, // Assuming Category ID 2 is 'Arts & Culture'
+                    LocationId = 2  // Assuming Location ID 2 is 'City Art Gallery'
+                },
+                new Event
+                {
+                    Id = 3,
+                    Title = "Community Charity Run",
+                    Description = "5k charity run to support local community projects. All ages welcome.",
+                    StartDate = new DateTime(2025, 9, 20, 8, 30, 0, DateTimeKind.Utc),
+                    EndDate = new DateTime(2025, 9, 20, 11, 0, 0, DateTimeKind.Utc),
+                    Status = EventStatus.Completed, // Assuming this event already happened
+                    CategoryId = 3, // Assuming Category ID 3 is 'Community'
+                    LocationId = 3  // Assuming Location ID 3 is 'Central Park'
+                },
+                new Event
+                {
+                    Id = 4,
+                    Title = "Music Festival: Summer Sounds",
+                    Description = "Weekend music festival featuring diverse genres and artists.",
+                    StartDate = new DateTime(2025, 8, 1, 14, 0, 0, DateTimeKind.Utc), // Past event
+                    EndDate = new DateTime(2025, 8, 3, 23, 0, 0, DateTimeKind.Utc),
+                    Status = EventStatus.Completed,
+                    CategoryId = 4, // Assuming Category ID 4 is 'Music'
+                    LocationId = 1  // Back at Conference Center A (maybe outdoor area)
+                },
+                 new Event
+                 {
+                     Id = 5,
+                     Title = "Advanced C# Workshop",
+                     Description = "Deep dive into advanced C# features and .NET internals.",
+                     StartDate = new DateTime(2025, 11, 25, 9, 0, 0, DateTimeKind.Utc),
+                     EndDate = new DateTime(2025, 11, 26, 16, 30, 0, DateTimeKind.Utc),
+                     Status = EventStatus.Published,
+                     CategoryId = 1, // Technology
+                     LocationId = 2  // City Art Gallery (maybe a specific room) - reusing location
+                 }
+            );
         }
     }
 }

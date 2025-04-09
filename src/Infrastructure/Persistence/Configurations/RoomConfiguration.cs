@@ -39,6 +39,17 @@ namespace EventManagement.Infrastructure.Persistence.Configurations
             // Indexes
             builder.HasIndex(r => new { r.LocationId, r.Name })
                    .IsUnique(); // Ensure room names are unique within a location
+
+            // Seed Data
+            builder.HasData(
+                new Room { Id = 1, Name = "Grand Ballroom", Capacity = 500, LocationId = 1 },
+                new Room { Id = 2, Name = "Meeting Room 101", Capacity = 50, LocationId = 1 },
+                new Room { Id = 3, Name = "Meeting Room 102", Capacity = 50, LocationId = 1 },
+                new Room { Id = 4, Name = "Innovation Hall", Capacity = 300, LocationId = 2 },
+                new Room { Id = 5, Name = "Workshop Alpha", Capacity = 75, LocationId = 2 },
+                new Room { Id = 6, Name = "Lecture Hall C1", Capacity = 200, LocationId = 3 },
+                new Room { Id = 7, Name = "Seminar Room C2", Capacity = 40, LocationId = 3 }
+            );
         }
     }
 }

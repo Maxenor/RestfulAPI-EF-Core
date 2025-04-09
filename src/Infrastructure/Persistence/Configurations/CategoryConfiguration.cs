@@ -30,6 +30,15 @@ namespace EventManagement.Infrastructure.Persistence.Configurations
             // Indexes
             builder.HasIndex(c => c.Name)
                    .IsUnique(); // Ensure category names are unique
+
+            // Seed Data
+            builder.HasData(
+                new Category { Id = 1, Name = "Technology", Description = "Events related to software, hardware, and the internet." },
+                new Category { Id = 2, Name = "Music", Description = "Concerts, festivals, and music workshops." },
+                new Category { Id = 3, Name = "Sports", Description = "Sporting events, competitions, and fitness activities." },
+                new Category { Id = 4, Name = "Food &amp; Drink", Description = "Culinary events, food festivals, and wine tastings." },
+                new Category { Id = 5, Name = "Arts &amp; Culture", Description = "Exhibitions, theatre performances, and cultural festivals." }
+            );
         }
     }
 }
