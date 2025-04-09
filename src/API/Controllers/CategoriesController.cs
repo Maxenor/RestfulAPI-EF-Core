@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace EventManagement.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [Produces(MediaTypeNames.Application.Json)] // Specify default content type
     public class CategoriesController : ControllerBase
     {

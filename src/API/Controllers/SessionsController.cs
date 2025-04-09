@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace EventManagement.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")] // Standard route: /api/sessions
+    [Route("api/v1/[controller]")] // Updated route with versioning
     public class SessionsController : ControllerBase
     {
         private readonly ISessionService _sessionService;
@@ -21,7 +21,7 @@ namespace EventManagement.API.Controllers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        // GET: api/sessions
+        // GET: api/v1/sessions
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<SessionDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -39,7 +39,7 @@ namespace EventManagement.API.Controllers
             }
         }
 
-        // GET: api/sessions/{id}
+        // GET: api/v1/sessions/{id}
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(SessionDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -63,7 +63,7 @@ namespace EventManagement.API.Controllers
             }
         }
 
-        // POST: api/sessions
+        // POST: api/v1/sessions
         [HttpPost]
         [ProducesResponseType(typeof(SessionDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -99,7 +99,7 @@ namespace EventManagement.API.Controllers
             }
         }
 
-        // PUT: api/sessions/{id}
+        // PUT: api/v1/sessions/{id}
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -139,7 +139,7 @@ namespace EventManagement.API.Controllers
             }
         }
 
-        // DELETE: api/sessions/{id}
+        // DELETE: api/v1/sessions/{id}
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

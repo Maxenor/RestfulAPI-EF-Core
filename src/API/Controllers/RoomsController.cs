@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging; // Optional: For logging
 namespace EventManagement.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class RoomsController : ControllerBase
     {
         private readonly IRoomService _roomService;

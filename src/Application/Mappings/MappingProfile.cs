@@ -19,13 +19,19 @@ namespace EventManagement.Application.Mappings
             // Category Mappings
             CreateMap<Category, CategoryDto>();
             // Add mappings for Create/Update DTOs if needed (usually handled in service)
+            CreateMap<CreateCategoryDto, Category>(); // Map Create DTO to Entity
+            CreateMap<UpdateCategoryDto, Category>(); // Map Update Category DTO to Entity
 
             // Location Mappings
             CreateMap<Location, LocationDto>();
+            CreateMap<CreateLocationDto, Location>(); // Map Create Location DTO to Entity
 
+            CreateMap<UpdateLocationDto, Location>(); // Map Update Location DTO to Entity
             // Room Mappings
             CreateMap<Room, RoomDto>();
+            CreateMap<CreateRoomDto, Room>(); // Map Create Room DTO to Entity
 
+            CreateMap<UpdateRoomDto, Room>(); // Map Update Room DTO to Entity
             // Speaker Mappings
             CreateMap<Speaker, SpeakerDto>();
             CreateMap<CreateSpeakerDto, Speaker>(); // Map Create DTO to Entity
@@ -42,7 +48,9 @@ namespace EventManagement.Application.Mappings
                 .ForMember(dest => dest.Speakers, opt => opt.MapFrom(src => src.SessionSpeakers.Select(ss => ss.Speaker)));
                 // Room is mapped automatically by name convention (Room -> RoomDto)
 
+            CreateMap<CreateSessionDto, Session>(); // Map Create Session DTO to Entity
             // Event Mappings
+            CreateMap<UpdateSessionDto, Session>(); // Map Update Session DTO to Entity
             CreateMap<Event, EventListDto>(); // Category and Location mapped automatically
             CreateMap<Event, EventDetailDto>()
                 // Map Sessions list within Event
