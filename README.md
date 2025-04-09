@@ -79,8 +79,8 @@ docker compose up -d
 This will start both the API and the MariaDB database in containers.
 
 3. Access the API
-   - API: http://localhost:5280
-   - Swagger Documentation: http://localhost:5280/swagger
+   - API: https://localhost:5002
+   - Swagger Documentation: https://localhost:5003/swagger
 
 ### Manual Development Setup
 
