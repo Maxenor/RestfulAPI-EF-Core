@@ -10,16 +10,16 @@ namespace EventManagement.Infrastructure.Persistence
     public class EventManagementDbContext : DbContext
     {
         // DbSet properties for each entity represent tables in the database
-        public DbSet<Event> Events { get; set; } = null!;
-        public DbSet<Participant> Participants { get; set; } = null!;
-        public DbSet<Session> Sessions { get; set; } = null!;
-        public DbSet<Speaker> Speakers { get; set; } = null!;
-        public DbSet<Location> Locations { get; set; } = null!;
-        public DbSet<Room> Rooms { get; set; } = null!;
-        public DbSet<Category> Categories { get; set; } = null!;
-        public DbSet<Rating> Ratings { get; set; } = null!;
-        public DbSet<EventParticipant> EventParticipants { get; set; } = null!;
-        public DbSet<SessionSpeaker> SessionSpeakers { get; set; } = null!;
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Participant> Participants { get; set; }
+        public DbSet<Session> Sessions { get; set; }
+        public DbSet<Speaker> Speakers { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
+        public DbSet<EventParticipant> EventParticipants { get; set; }
+        public DbSet<SessionSpeaker> SessionSpeakers { get; set; }
 
         /// <param name="options">The options for this context.</param>
         public EventManagementDbContext(DbContextOptions<EventManagementDbContext> options)
