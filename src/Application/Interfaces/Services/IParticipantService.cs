@@ -1,8 +1,6 @@
 using EventManagement.Application.DTOs.Common;
 using EventManagement.Application.DTOs.Event; // For EventListDto
 using EventManagement.Application.DTOs.Participant;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace EventManagement.Application.Interfaces.Services
 {

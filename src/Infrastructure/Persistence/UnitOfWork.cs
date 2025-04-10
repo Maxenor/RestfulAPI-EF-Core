@@ -1,22 +1,16 @@
 using EventManagement.Application.Interfaces.Persistence;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
+
 
 namespace EventManagement.Infrastructure.Persistence
 {
-    /// <summary>
-    /// Implementation of the IUnitOfWork interface for managing transactions across repositories
-    /// </summary>
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly EventManagementDbContext _dbContext;
-        private IDbContextTransaction _transaction;
+        private IDbContextTransaction? _transaction;
         private bool _disposed = false;
 
-        // Repository fields - using lazy loading for better performance
+        // Repository fields
         private ICategoryRepository _categoryRepository;
         private IEventRepository _eventRepository;
         private ILocationRepository _locationRepository;
@@ -48,7 +42,6 @@ namespace EventManagement.Infrastructure.Persistence
             _speakerRepository = speakerRepository ?? throw new ArgumentNullException(nameof(speakerRepository));
         }
 
-        // Repository properties
         public ICategoryRepository Categories => _categoryRepository;
         public IEventRepository Events => _eventRepository;
         public ILocationRepository Locations => _locationRepository;

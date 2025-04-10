@@ -5,11 +5,7 @@ using EventManagement.Application.Exceptions;
 using EventManagement.Application.Interfaces.Persistence;
 using EventManagement.Application.Interfaces.Services;
 using EventManagement.Domain.Entities;
-using Microsoft.EntityFrameworkCore; 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace EventManagement.Application.Services
 {
@@ -35,11 +31,10 @@ namespace EventManagement.Application.Services
 
             var eventDtos = _mapper.Map<List<EventListDto>>(events);
 
-            // Use the overload that accepts the pre-calculated total count
             return PagedResult<EventListDto>.CreateWithKnownTotalCount(eventDtos, totalCount, pageNumber, pageSize);
         }
 
-        public async Task<EventDetailDto?> GetEventByIdAsync(int id)
+        public async Task<EventDetailDto> GetEventByIdAsync(int id)
         {
             var eventEntity = await _unitOfWork.Events.GetEventWithDetailsAsync(id);
             if (eventEntity == null)
@@ -72,7 +67,7 @@ namespace EventManagement.Application.Services
                     throw new NotFoundException(nameof(Location), createEventDto.LocationId);
 
                 var eventEntity = _mapper.Map<Event>(createEventDto);
-                eventEntity.Status = EventStatus.Draft; // Ensure default status on creation
+                eventEntity.Status = EventStatus.Draft;
 
                 var createdEvent = await _unitOfWork.Events.AddAsync(eventEntity);
                 await _unitOfWork.SaveChangesAsync(); // Save changes
@@ -82,11 +77,11 @@ namespace EventManagement.Application.Services
 
                 // Fetch the details again to include navigation properties for the response DTO
                 var detailedEvent = await GetEventByIdAsync(createdEvent.Id);
-                return detailedEvent; // Will not be null now since we handle NotFoundException above
+                return detailedEvent;
             }
             catch
             {
-                // Rollback the transaction in case of any error
+                // Rollback in case of any error
                 await _unitOfWork.RollbackTransactionAsync();
                 throw;
             }
@@ -150,7 +145,6 @@ namespace EventManagement.Application.Services
                     throw new NotFoundException(nameof(Event), id);
                 }
 
-                // Consider business rules: Can published/completed events be deleted?
                 if (eventToDelete.Status == EventStatus.Completed)
                 {
                     throw new ConflictException($"Event with ID {id} is completed and cannot be deleted.");
@@ -194,7 +188,6 @@ namespace EventManagement.Application.Services
                     throw new ConflictException($"Participant {participantId} is already registered for event {eventId}.");
                 }
 
-                // Business rule: Can't register for events that are completed or cancelled
                 if (eventEntity.Status == EventStatus.Completed || eventEntity.Status == EventStatus.Cancelled)
                 {
                     throw new ConflictException($"Cannot register for event {eventId} because it is {eventEntity.Status}.");
@@ -236,14 +229,16 @@ namespace EventManagement.Application.Services
 
                 // Find the specific registration record
                 var eventWithParticipants = await _unitOfWork.Events.GetEventWithDetailsAsync(eventId);
-                var registration = eventWithParticipants?.EventParticipants.FirstOrDefault(ep => ep.ParticipantId == participantId);
+                if (eventWithParticipants == null)
+                    throw new NotFoundException(nameof(Event), eventId);
+                    
+                var registration = eventWithParticipants.EventParticipants.FirstOrDefault(ep => ep.ParticipantId == participantId);
 
                 if (registration == null)
                 {
                     throw new NotFoundException("Registration", $"Event {eventId}, Participant {participantId}");
                 }
 
-                // Business rule: Can't unregister after event has started
                 if (eventWithParticipants.StartDate <= DateTime.UtcNow)
                 {
                     throw new ConflictException($"Cannot unregister from event {eventId} as it has already started or completed.");

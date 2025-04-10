@@ -3,28 +3,24 @@ using EventManagement.Application.DTOs.Session;
 using EventManagement.Application.Interfaces.Persistence;
 using EventManagement.Application.Interfaces.Services;
 using EventManagement.Domain.Entities;
-using Microsoft.Extensions.Logging; // Added for logging
-using System;
-using System.Collections.Generic;
-using System.Linq; // Added for LINQ operations
-using System.Threading.Tasks;
+
 
 namespace EventManagement.Application.Services
 {
     public class SessionService : ISessionService
     {
         private readonly ISessionRepository _sessionRepository;
-        private readonly IEventRepository _eventRepository; // To validate EventId
-        private readonly IRoomRepository _roomRepository;   // To validate RoomId
+        private readonly IEventRepository _eventRepository; 
+        private readonly IRoomRepository _roomRepository;
         private readonly IMapper _mapper;
-        private readonly ILogger<SessionService> _logger; // Added logger
+        private readonly ILogger<SessionService> _logger;
 
         public SessionService(
             ISessionRepository sessionRepository,
             IEventRepository eventRepository,
             IRoomRepository roomRepository,
             IMapper mapper,
-            ILogger<SessionService> logger) // Added logger injection
+            ILogger<SessionService> logger)
         {
             _sessionRepository = sessionRepository ?? throw new ArgumentNullException(nameof(sessionRepository));
             _eventRepository = eventRepository ?? throw new ArgumentNullException(nameof(eventRepository));
@@ -36,8 +32,6 @@ namespace EventManagement.Application.Services
         public async Task<IEnumerable<SessionDto>> GetAllSessionsAsync()
         {
             _logger.LogInformation("Retrieving all sessions.");
-            // Using ListAllAsync - Note: This might not load related Room/Speakers unless the implementation does.
-            // If related data is missing, a specific repository method like GetAllSessionsWithDetailsAsync might be needed.
             var sessions = await _sessionRepository.ListAllAsync();
             return _mapper.Map<IEnumerable<SessionDto>>(sessions);
         }
@@ -45,7 +39,6 @@ namespace EventManagement.Application.Services
         public async Task<SessionDto?> GetSessionByIdAsync(int id)
         {
             _logger.LogInformation("Retrieving session with ID: {SessionId}", id);
-            // Use the specific method designed to include details
             var session = await _sessionRepository.GetSessionWithDetailsAsync(id);
 
             if (session == null)
@@ -87,11 +80,9 @@ namespace EventManagement.Application.Services
 
             // Add to repository
             var addedSession = await _sessionRepository.AddAsync(session);
-            // SaveChangesAsync is likely handled by a Unit of Work or higher layer
 
             _logger.LogInformation("Successfully created session with ID: {SessionId}", addedSession.Id);
 
-            // Fetch the created session with includes using the specific method
             var createdSessionWithDetails = await _sessionRepository.GetSessionWithDetailsAsync(addedSession.Id);
 
             if (createdSessionWithDetails == null)

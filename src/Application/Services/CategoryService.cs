@@ -3,10 +3,6 @@ using EventManagement.Application.DTOs.Category;
 using EventManagement.Application.Interfaces.Persistence;
 using EventManagement.Application.Interfaces.Services;
 using EventManagement.Domain.Entities;
-using Microsoft.Extensions.Logging; // Added for potential logging
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace EventManagement.Application.Services
 {
@@ -14,29 +10,27 @@ namespace EventManagement.Application.Services
     {
         private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
-        private readonly ILogger<CategoryService> _logger; // Optional: for logging
+        private readonly ILogger<CategoryService> _logger;
         private readonly IUnitOfWork _unitOfWork;
 
         public CategoryService(ICategoryRepository categoryRepository, IMapper mapper, ILogger<CategoryService> logger, IUnitOfWork unitOfWork)
         {
             _categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger)); // Optional
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger)); 
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public async Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync(CancellationToken cancellationToken = default) // Keep CancellationToken here for potential future use or consistency at service layer
+        public async Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync(CancellationToken cancellationToken = default)
         {
             _logger.LogInformation("Retrieving all categories.");
-            // Use ListAllAsync and ignore cancellationToken for repository call based on IGenericRepository
             var categories = await _categoryRepository.ListAllAsync();
             return _mapper.Map<IEnumerable<CategoryDto>>(categories);
         }
 
-        public async Task<CategoryDto?> GetCategoryByIdAsync(int id, CancellationToken cancellationToken = default) // Keep CancellationToken
+        public async Task<CategoryDto?> GetCategoryByIdAsync(int id, CancellationToken cancellationToken = default)
         {
             _logger.LogInformation("Retrieving category with ID: {CategoryId}", id);
-            // Use GetByIdAsync without cancellationToken
             var category = await _categoryRepository.GetByIdAsync(id);
             if (category == null)
             {
@@ -46,7 +40,7 @@ namespace EventManagement.Application.Services
             return _mapper.Map<CategoryDto>(category);
         }
 
-        public async Task<CategoryDto> CreateCategoryAsync(CreateCategoryDto createCategoryDto, CancellationToken cancellationToken = default) // Keep CancellationToken
+        public async Task<CategoryDto> CreateCategoryAsync(CreateCategoryDto createCategoryDto, CancellationToken cancellationToken = default)
         {
             _logger.LogInformation("Creating a new category with name: {CategoryName}", createCategoryDto.Name);
             var category = _mapper.Map<Category>(createCategoryDto);

@@ -2,14 +2,9 @@ using AutoMapper;
 using EventManagement.Application.DTOs.Common;
 using EventManagement.Application.DTOs.Event;
 using EventManagement.Application.DTOs.Participant;
-using EventManagement.Application.Exceptions;
 using EventManagement.Application.Interfaces.Persistence;
 using EventManagement.Application.Interfaces.Services;
 using EventManagement.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EventManagement.Application.Services
 {

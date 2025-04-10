@@ -1,8 +1,6 @@
 using EventManagement.Application.DTOs.Common;
 using EventManagement.Application.DTOs.Event;
 using EventManagement.Domain.Entities; // For EventStatus enum
-using System;
-using System.Threading.Tasks;
 
 namespace EventManagement.Application.Interfaces.Services
 {

@@ -21,36 +21,19 @@ namespace EventManagement.Infrastructure.Persistence
         public DbSet<EventParticipant> EventParticipants { get; set; } = null!;
         public DbSet<SessionSpeaker> SessionSpeakers { get; set; } = null!;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EventManagementDbContext"/> class.
-        /// </summary>
         /// <param name="options">The options for this context.</param>
         public EventManagementDbContext(DbContextOptions<EventManagementDbContext> options)
             : base(options)
         {
         }
 
-        /// <summary>
-        /// Configures the model using Fluent API.
-        /// </summary>
         /// <param name="modelBuilder">The builder being used to construct the model for this context.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             // Apply all entity configurations defined in the current assembly
-            // This promotes cleaner code by separating configuration logic per entity.
-            // We will create these configuration classes in the next steps.
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
-            // Example: If not using separate configuration classes, you could configure here:
-            // modelBuilder.Entity<EventParticipant>()
-            //     .HasKey(ep => new { ep.EventId, ep.ParticipantId }); // Define composite key
-            //
-            // modelBuilder.Entity<SessionSpeaker>()
-            //     .HasKey(ss => new { ss.SessionId, ss.SpeakerId }); // Define composite key
-
-            // Add any additional global configurations or conventions here
         }
     }
 }

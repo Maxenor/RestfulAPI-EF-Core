@@ -1,6 +1,4 @@
 using EventManagement.Application.DTOs.Room;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace EventManagement.Application.Interfaces.Services
 {

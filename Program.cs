@@ -37,10 +37,11 @@ builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly); // Scan assembl
 builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IParticipantService, ParticipantService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ILocationService, LocationService>(); // Register LocationService
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<ISessionService, SessionService>();
 builder.Services.AddScoped<ISpeakerService, SpeakerService>(); // Register SpeakerService
-builder.Services.AddScoped<IRatingService, RatingService>(); // Register RatingService
+builder.Services.AddScoped<IRatingService, RatingService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

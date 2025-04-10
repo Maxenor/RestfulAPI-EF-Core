@@ -7,9 +7,9 @@ namespace EventManagement.Domain.Entities
         public int Id { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty; // Should be unique
-        public string? Company { get; set; } // Optional
-        public string? JobTitle { get; set; } // Optional
+        public string Email { get; set; } = string.Empty;
+        public string? Company { get; set; }
+        public string? JobTitle { get; set; }
 
         // Navigation Properties
         public virtual ICollection<EventParticipant> EventParticipants { get; set; } = new List<EventParticipant>();

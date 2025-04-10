@@ -3,7 +3,6 @@ using EventManagement.Application.DTOs.Speaker;
 using EventManagement.Application.Interfaces.Persistence;
 using EventManagement.Application.Interfaces.Services;
 using EventManagement.Domain.Entities;
-using Microsoft.Extensions.Logging;
 
 namespace EventManagement.Application.Services
 {
@@ -23,7 +22,6 @@ namespace EventManagement.Application.Services
         public async Task<IEnumerable<SpeakerDto>> GetAllSpeakersAsync(CancellationToken cancellationToken = default)
         {
             _logger.LogInformation("Retrieving all speakers.");
-            // ListAllAsync doesn't accept a cancellationToken
             var speakers = await _speakerRepository.ListAllAsync();
             return _mapper.Map<IEnumerable<SpeakerDto>>(speakers);
         }
@@ -31,7 +29,6 @@ namespace EventManagement.Application.Services
         public async Task<SpeakerDto?> GetSpeakerByIdAsync(int id, CancellationToken cancellationToken = default)
         {
             _logger.LogInformation("Retrieving speaker with ID: {SpeakerId}", id);
-            // GetByIdAsync doesn't accept a cancellationToken
             var speaker = await _speakerRepository.GetByIdAsync(id);
             if (speaker == null)
             {
@@ -45,7 +42,6 @@ namespace EventManagement.Application.Services
         {
             _logger.LogInformation("Creating a new speaker.");
             var speaker = _mapper.Map<Speaker>(createSpeakerDto);
-            // AddAsync doesn't accept a cancellationToken
             var createdSpeaker = await _speakerRepository.AddAsync(speaker);
             _logger.LogInformation("Speaker created successfully with ID: {SpeakerId}", createdSpeaker.Id);
             return _mapper.Map<SpeakerDto>(createdSpeaker);
@@ -54,7 +50,6 @@ namespace EventManagement.Application.Services
         public async Task<bool> UpdateSpeakerAsync(int id, UpdateSpeakerDto updateSpeakerDto, CancellationToken cancellationToken = default)
         {
             _logger.LogInformation("Attempting to update speaker with ID: {SpeakerId}", id);
-            // GetByIdAsync doesn't accept a cancellationToken
             var speakerToUpdate = await _speakerRepository.GetByIdAsync(id);
 
             if (speakerToUpdate == null)
@@ -64,7 +59,6 @@ namespace EventManagement.Application.Services
             }
 
             _mapper.Map(updateSpeakerDto, speakerToUpdate);
-            // UpdateAsync doesn't accept a cancellationToken
             await _speakerRepository.UpdateAsync(speakerToUpdate);
             _logger.LogInformation("Speaker with ID: {SpeakerId} updated successfully.", id);
             return true;
