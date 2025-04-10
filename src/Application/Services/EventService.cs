@@ -34,14 +34,14 @@ namespace EventManagement.Application.Services
             return PagedResult<EventListDto>.CreateWithKnownTotalCount(eventDtos, totalCount, pageNumber, pageSize);
         }
 
-        public async Task<EventDetailDto> GetEventByIdAsync(int id)
+        public async Task<EventDetailDto?> GetEventByIdAsync(int id) // Added nullable '?' to match interface
         {
             var eventEntity = await _unitOfWork.Events.GetEventWithDetailsAsync(id);
             if (eventEntity == null)
             {
                 throw new NotFoundException(nameof(Event), id);
             }
-            return _mapper.Map<EventDetailDto>(eventEntity);
+            return _mapper.Map<EventDetailDto>(eventEntity)!;
         }
 
         public async Task<EventDetailDto> CreateEventAsync(CreateEventDto createEventDto)

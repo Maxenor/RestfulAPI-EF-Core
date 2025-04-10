@@ -55,6 +55,7 @@ namespace EventManagement.API.Middleware
                 Status = (int)statusCode,
                 Title = ErrorCodes.GetErrorMessage(errorCode),
                 Detail = "An unexpected error occurred while processing your request.",
+                DocumentationUrl = "https://api.eventmanagement.com/docs/errors", // Add this line to set the required property
                 Instance = context.Request.Path,
                 ErrorId = Guid.NewGuid().ToString("N"),
                 Method = context.Request.Method

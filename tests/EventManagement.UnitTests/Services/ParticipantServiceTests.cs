@@ -143,7 +143,7 @@ namespace EventManagement.UnitTests.Services
 
             _mockParticipantRepository
                 .Setup(repo => repo.GetByIdAsync(participantId))
-                .ReturnsAsync((Participant)null);
+                .Returns(Task.FromResult<Participant?>(null));
 
             // Act
             var result = await _participantService.GetParticipantByIdAsync(participantId);
@@ -187,7 +187,7 @@ namespace EventManagement.UnitTests.Services
 
             _mockParticipantRepository
                 .Setup(repo => repo.GetParticipantByEmailAsync(createParticipantDto.Email))
-                .ReturnsAsync((Participant)null);
+                .Returns(Task.FromResult<Participant?>(null));
 
             _mockMapper
                 .Setup(m => m.Map<Participant>(createParticipantDto))
@@ -316,7 +316,7 @@ namespace EventManagement.UnitTests.Services
 
             _mockParticipantRepository
                 .Setup(repo => repo.GetByIdAsync(participantId))
-                .ReturnsAsync((Participant)null);
+                .Returns(Task.FromResult<Participant?>(null));
 
             // Act
             Func<Task> act = async () => await _participantService.GetParticipantEventHistoryAsync(participantId);
@@ -334,7 +334,7 @@ namespace EventManagement.UnitTests.Services
 
             _mockParticipantRepository
                 .Setup(repo => repo.GetByIdAsync(participantId))
-                .ReturnsAsync((Participant)null);
+                .Returns(Task.FromResult<Participant?>(null));
 
             // Act
             Func<Task> act = async () => await _participantService.DeleteParticipantAsync(participantId);
@@ -422,7 +422,7 @@ namespace EventManagement.UnitTests.Services
             // Assume email is changing, mock the check for the new email (return null as it's unique)
             _mockParticipantRepository
                 .Setup(repo => repo.GetParticipantByEmailAsync(updateDto.Email))
-                .ReturnsAsync((Participant)null);
+                .Returns(Task.FromResult<Participant?>(null));
 
             _mockMapper.Setup(m => m.Map(updateDto, existingParticipant)); // Mock the mapping action
             _mockParticipantRepository.Setup(repo => repo.UpdateAsync(existingParticipant)); // Mock update
@@ -451,7 +451,7 @@ namespace EventManagement.UnitTests.Services
 
             _mockParticipantRepository
                 .Setup(repo => repo.GetByIdAsync(participantId))
-                .ReturnsAsync((Participant)null); // Simulate not found
+                .Returns(Task.FromResult<Participant?>(null)); // Simulate not found
 
             // Act
             Func<Task> act = async () => await _participantService.UpdateParticipantAsync(updateDto);
